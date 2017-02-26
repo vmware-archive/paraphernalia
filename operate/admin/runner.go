@@ -1,7 +1,6 @@
 package admin
 
 import (
-	"fmt"
 	"net"
 	"net/http"
 	"net/http/pprof"
@@ -30,28 +29,6 @@ func Runner(port string, options ...OptionFunc) (ifrit.Runner, error) {
 	}
 
 	return server, nil
-}
-
-// ServiceInfo represents information about a service that operators may find
-// useful.
-type ServiceInfo struct {
-	Name        string
-	Description string
-	Team        string
-}
-
-// WithInfo configures the information endpoint to present information about
-// the service.
-func WithInfo(info ServiceInfo) OptionFunc {
-	return func(s *server) error {
-		s.handler.HandleFunc("/info", func(w http.ResponseWriter, req *http.Request) {
-			fmt.Fprintf(w, "Name: %s\n", info.Name)
-			fmt.Fprintf(w, "Description: %s\n", info.Description)
-			fmt.Fprintf(w, "Team: %s\n", info.Team)
-		})
-
-		return nil
-	}
 }
 
 type server struct {
