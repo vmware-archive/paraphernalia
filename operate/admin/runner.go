@@ -1,6 +1,7 @@
 package admin
 
 import (
+	"fmt"
 	"net"
 	"net/http"
 	"net/http/pprof"
@@ -12,21 +13,54 @@ import (
 	"github.com/tedsuo/ifrit/http_server"
 )
 
-func Runner(port string, options ...func(*Server) error) (ifrit.Runner, error) {
-	mux := defaultDebugEndpoints()
+// OptionFunc is used to configure the runner.
+type OptionFunc func(*server) error
 
-	return &Server{
+// Runner builds and returns a runner that, when run, will start an HTTP server
+// listening on the specified port that provides the Go pprof endpoints from
+// the standard library along with the additional trace endpoints.
+func Runner(port string, options ...OptionFunc) (ifrit.Runner, error) {
+	server := &server{
 		port:    port,
-		handler: mux,
-	}, nil
+		handler: defaultDebugEndpoints(),
+	}
+
+	for _, option := range options {
+		option(server)
+	}
+
+	return server, nil
 }
 
-type Server struct {
+// ServiceInfo represents information about a service that operators may find
+// useful.
+type ServiceInfo struct {
+	Name        string
+	Description string
+	Team        string
+}
+
+// WithInfo configures the information endpoint to present information about
+// the service.
+func WithInfo(info ServiceInfo) OptionFunc {
+	return func(s *server) error {
+		s.handler.HandleFunc("/info", func(w http.ResponseWriter, req *http.Request) {
+			fmt.Fprintf(w, "Name: %s\n", info.Name)
+			fmt.Fprintf(w, "Description: %s\n", info.Description)
+			fmt.Fprintf(w, "Team: %s\n", info.Team)
+		})
+
+		return nil
+	}
+}
+
+type server struct {
 	port    string
-	handler http.Handler
+	handler *http.ServeMux
 }
 
-func (s *Server) Run(signals <-chan os.Signal, ready chan<- struct{}) error {
+// Run starts the server.
+func (s *server) Run(signals <-chan os.Signal, ready chan<- struct{}) error {
 	address := net.JoinHostPort("localhost", s.port)
 
 	return http_server.New(address, s.handler).Run(signals, ready)
