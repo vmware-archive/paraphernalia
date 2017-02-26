@@ -20,6 +20,9 @@ type acl struct {
 	credentials.TransportCredentials
 
 	allowed map[string]struct{}
+
+	origConfig  *tls.Config
+	origAllowed []string
 }
 
 func (a *acl) ServerHandshake(rawConn net.Conn) (net.Conn, credentials.AuthInfo, error) {
@@ -43,6 +46,10 @@ func (a *acl) ServerHandshake(rawConn net.Conn) (net.Conn, credentials.AuthInfo,
 	return conn, info, nil
 }
 
+func (a *acl) Clone() credentials.TransportCredentials {
+	return NewTLS(a.origConfig, a.origAllowed...)
+}
+
 // NewTLS creates a new transport credential that verifies that any connecting
 // client has a common name from the allowed list.
 func NewTLS(c *tls.Config, allowed ...string) credentials.TransportCredentials {
@@ -56,5 +63,8 @@ func NewTLS(c *tls.Config, allowed ...string) credentials.TransportCredentials {
 	return &acl{
 		TransportCredentials: creds,
 		allowed:              allow,
+
+		origConfig:  c,
+		origAllowed: allowed,
 	}
 }
