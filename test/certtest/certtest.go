@@ -30,7 +30,7 @@ type Authority struct {
 }
 
 // BuildCA creates a new test Certificate Authority. The name argument can be
-// used to distingish between multiple authorities.
+// used to distinguish between multiple authorities.
 func BuildCA(name string) (*Authority, error) {
 	key, err := pkix.CreateRSAKey(keySize)
 	if err != nil {
@@ -50,7 +50,7 @@ func BuildCA(name string) (*Authority, error) {
 
 // BuildSignedCertificate creates a new signed certificate which is valid for
 // the parameterized IPs and domains. The certificates it creates should only
-// be used ephemeraly in tests.
+// be used ephemerally in tests.
 func (a *Authority) BuildSignedCertificate(name string, ips []net.IP, domains []string) (*Certificate, error) {
 	key, err := pkix.CreateRSAKey(keySize)
 	if err != nil {
