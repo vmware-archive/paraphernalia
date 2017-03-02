@@ -38,7 +38,7 @@ var _ = Describe("GRPC Server", func() {
 	BeforeEach(func() {
 		grpclog.SetLogger(log.New(GinkgoWriter, "", log.LstdFlags))
 
-		listenAddr = fmt.Sprintf(":%d", GinkgoParallelNode()+9100)
+		listenAddr = fmt.Sprintf("localhost:%d", GinkgoParallelNode()+9100)
 		logger = lagertest.NewTestLogger("grpc-server")
 		dummyServer = &DummyServer{}
 
