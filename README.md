@@ -23,5 +23,5 @@ So I can troll you like I [trolled myself][fml].
 ## usage
 
 Please do! There are no backwards compatibility guarantees until things are a
-littte further along. However, I'm not out to mess with you things will stay as
-sane as possible.
+littte further along. However, I'm not out to mess with you: things will stay
+as similar as possible.
