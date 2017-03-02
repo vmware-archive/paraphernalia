@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/pivotal-cf/paraphanerlia/operate/admin"
+	"github.com/pivotal-cf/paraphernalia/operate/admin"
 	"github.com/tedsuo/ifrit"
 
 	. "github.com/onsi/ginkgo"

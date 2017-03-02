@@ -1,3 +1,3 @@
-# paraphanerlia
+# paraphernalia
 
 > useful go things

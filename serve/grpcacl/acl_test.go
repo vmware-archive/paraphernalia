@@ -18,9 +18,9 @@ import (
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/test/grpc_testing"
 
-	"github.com/pivotal-cf/paraphanerlia/serve/grpcacl"
-	"github.com/pivotal-cf/paraphanerlia/serve/grpcrunner"
-	"github.com/pivotal-cf/paraphanerlia/test/certtest"
+	"github.com/pivotal-cf/paraphernalia/serve/grpcacl"
+	"github.com/pivotal-cf/paraphernalia/serve/grpcrunner"
+	"github.com/pivotal-cf/paraphernalia/test/certtest"
 )
 
 var _ = Describe("GRPC Server", func() {
