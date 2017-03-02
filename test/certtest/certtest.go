@@ -14,6 +14,8 @@ const (
 	country  = "AQ"
 	province = "Ross Island"
 	city     = "McMurdo Station"
+
+	keySize = 2048
 )
 
 // LocalhostOnly is a convenience shortcut for a parsed version of the
@@ -30,7 +32,7 @@ type Authority struct {
 // BuildCA creates a new test Certificate Authority. The name argument can be
 // used to distingish between multiple authorities.
 func BuildCA(name string) (*Authority, error) {
-	key, err := pkix.CreateRSAKey(2048)
+	key, err := pkix.CreateRSAKey(keySize)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +52,7 @@ func BuildCA(name string) (*Authority, error) {
 // the parameterized IPs and domains. The certificates it creates should only
 // be used ephemeraly in tests.
 func (a *Authority) BuildSignedCertificate(name string, ips []net.IP, domains []string) (*Certificate, error) {
-	key, err := pkix.CreateRSAKey(2048)
+	key, err := pkix.CreateRSAKey(keySize)
 	if err != nil {
 		return nil, err
 	}
