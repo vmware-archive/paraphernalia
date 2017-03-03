@@ -142,8 +142,8 @@ type signOptions struct {
 
 func defaultSignOptions() *signOptions {
 	return &signOptions{
-		domains: []string{},
-		ips:     []net.IP{},
+		domains: []string{"localhost"},
+		ips:     []net.IP{net.ParseIP("127.0.0.1")},
 	}
 }
 

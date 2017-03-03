@@ -49,7 +49,7 @@ var _ = Describe("GRPC Server", func() {
 		pool, err := ca.CertPool()
 		Expect(err).NotTo(HaveOccurred())
 
-		serverCert, err := ca.BuildSignedCertificate("server", certtest.WithDomains("localhost"))
+		serverCert, err := ca.BuildSignedCertificate("server")
 		Expect(err).NotTo(HaveOccurred())
 
 		cert, err := serverCert.TLSCertificate()
@@ -114,7 +114,7 @@ func clientConfig(ca *certtest.Authority, name string) *tls.Config {
 	pool, err := ca.CertPool()
 	Expect(err).NotTo(HaveOccurred())
 
-	cert, err := ca.BuildSignedCertificate(name, certtest.WithDomains("localhost"))
+	cert, err := ca.BuildSignedCertificate(name)
 	Expect(err).NotTo(HaveOccurred())
 
 	clientCert, err := cert.TLSCertificate()
