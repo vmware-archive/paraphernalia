@@ -8,9 +8,10 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/pivotal-cf/paraphanerlia/operate/pidfile"
 
 	"github.com/tedsuo/ifrit"
+
+	"github.com/pivotal-cf/paraphernalia/operate/pidfile"
 )
 
 var _ = Describe("Pidfile", func() {
