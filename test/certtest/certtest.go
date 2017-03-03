@@ -15,7 +15,11 @@ const (
 	province = "Ross Island"
 	city     = "McMurdo Station"
 
-	keySize = 2048
+	// This is nowhere near enough bits for a real certificate but creating
+	// larger keys on each test run takes too long.
+	//
+	// Do not use these certificates to transport secrets.
+	keySize = 1024
 )
 
 // Authority represents a Certificate Authority. It should not be used for
