@@ -18,10 +18,6 @@ const (
 	keySize = 2048
 )
 
-// LocalhostOnly is a convenience shortcut for a parsed version of the
-// localhost IP address.
-var LocalhostOnly = []net.IP{net.ParseIP("127.0.0.1")}
-
 // Authority represents a Certificate Authority. It should not be used for
 // anything except ephemeral test usage.
 type Authority struct {
@@ -48,16 +44,40 @@ func BuildCA(name string) (*Authority, error) {
 	}, nil
 }
 
+// SignOption is used to alter the signed certificate parameters.
+type SignOption func(*signOptions)
+
+// WithIPs adds the passed IPs to be valid for the requested certificate.
+func WithIPs(ips ...net.IP) SignOption {
+	return func(options *signOptions) {
+		options.ips = ips
+	}
+}
+
+// WithDomains adds the passed domains to be valid for the requested
+// certificate.
+func WithDomains(domains ...string) SignOption {
+	return func(options *signOptions) {
+		options.domains = domains
+	}
+}
+
 // BuildSignedCertificate creates a new signed certificate which is valid for
-// the parameterized IPs and domains. The certificates it creates should only
-// be used ephemerally in tests.
-func (a *Authority) BuildSignedCertificate(name string, ips []net.IP, domains []string) (*Certificate, error) {
+// `localhost` and `127.0.0.1` by default. This can be changed by passing in
+// the various options. The certificates it creates should only be used
+// ephemerally in tests.
+func (a *Authority) BuildSignedCertificate(name string, options ...SignOption) (*Certificate, error) {
 	key, err := pkix.CreateRSAKey(keySize)
 	if err != nil {
 		return nil, err
 	}
 
-	csr, err := pkix.CreateCertificateSigningRequest(key, ou, ips, domains, o, country, province, city, name)
+	opts := defaultSignOptions()
+	for _, o := range options {
+		opts.apply(o)
+	}
+
+	csr, err := pkix.CreateCertificateSigningRequest(key, ou, opts.ips, opts.domains, o, country, province, city, name)
 	if err != nil {
 		return nil, err
 	}
@@ -113,4 +133,20 @@ func (c *Certificate) TLSCertificate() (tls.Certificate, error) {
 	}
 
 	return tls.X509KeyPair(certBytes, keyBytes)
+}
+
+type signOptions struct {
+	domains []string
+	ips     []net.IP
+}
+
+func defaultSignOptions() *signOptions {
+	return &signOptions{
+		domains: []string{},
+		ips:     []net.IP{},
+	}
+}
+
+func (s *signOptions) apply(option SignOption) {
+	option(s)
 }
