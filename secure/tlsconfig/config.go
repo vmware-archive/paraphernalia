@@ -22,7 +22,7 @@ type ServerOption func(*tls.Config)
 type ClientOption func(*tls.Config)
 
 // BuildConfig creates a half configured TLS configuration.
-func BuildConfig(opts ...TLSOption) Config {
+func Build(opts ...TLSOption) Config {
 	return Config{
 		opts: opts,
 	}

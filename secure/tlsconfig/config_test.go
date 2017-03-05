@@ -78,7 +78,7 @@ var _ = Describe("generating TLS configurations", func() {
 		)
 
 		JustBeforeEach(func() {
-			config = tlsconfig.BuildConfig(tlsOpts...).Server(serverOpts...)
+			config = tlsconfig.Build(tlsOpts...).Server(serverOpts...)
 		})
 
 		ItCanUseInternalPivotalDefaults()
@@ -115,7 +115,7 @@ var _ = Describe("generating TLS configurations", func() {
 		)
 
 		JustBeforeEach(func() {
-			config = tlsconfig.BuildConfig(tlsOpts...).Client(clientOpts...)
+			config = tlsconfig.Build(tlsOpts...).Client(clientOpts...)
 		})
 
 		ItCanUseInternalPivotalDefaults()
@@ -144,7 +144,7 @@ var _ = Describe("generating TLS configurations", func() {
 
 	Describe("configuration modification", func() {
 		It("does not affect other configurations", func() {
-			base := tlsconfig.BuildConfig()
+			base := tlsconfig.Build()
 			client := base.Client()
 
 			ca, err := certtest.BuildCA("tlsconfig")
