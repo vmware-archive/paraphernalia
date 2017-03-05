@@ -35,10 +35,12 @@ var _ = Describe("generating TLS configurations", func() {
 			})
 
 			It("uses approved cipher suites", func() {
-				Expect(config.CipherSuites).To(ConsistOf(
+				Expect(config.CipherSuites).To(Equal([]uint16{
 					tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+					tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
 					tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-				))
+					tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+				}))
 			})
 
 			It("uses approved curves", func() {
