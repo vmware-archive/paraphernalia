@@ -1,6 +1,12 @@
+<img src="https://cdn.rawgit.com/pivotal-cf/paraphernalia/master/docs/images/collection.svg" align="left" width="192px" height="192px"/>
+
 # paraphernalia
 
-> useful go things
+> *useful go things*
+
+[![Apache 2.0 License](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](/LICENSE)
+
+<br />
 
 ## about
 
@@ -25,3 +31,7 @@ So I can troll you like I [trolled myself][fml].
 Please do! There are no backwards compatibility guarantees until things are a
 littte further along. However, I'm not out to mess with you: things will stay
 as similar as possible.
+
+## image credit
+
+"Collection" by [Karthik Srinivas](https://thenounproject.com/aathis/)
