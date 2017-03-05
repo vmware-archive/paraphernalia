@@ -21,7 +21,7 @@ type ServerOption func(*tls.Config)
 // ClientOption can be used to configure a TLS configuration for a client.
 type ClientOption func(*tls.Config)
 
-// BuildConfig creates a half configured TLS configuration.
+// Build creates a half configured TLS configuration.
 func Build(opts ...TLSOption) Config {
 	return Config{
 		opts: opts,
