@@ -19,7 +19,7 @@ type runner struct {
 // delete the file. If there is already a PID file at the specified path then
 // it will check to see if the PID is still valid (still running). If it is
 // valid then an error will be returned. If it is not valid then it will be
-// cleared and a newPID file will be written. This prevents multiple versions
+// cleared and a new PID file will be written. This prevents multiple versions
 // of the same server starting.
 //
 // Locking is in place to make sure this is process-safe.
