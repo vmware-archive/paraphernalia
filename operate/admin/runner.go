@@ -1,3 +1,5 @@
+// Package admin simplifies the setup of various administrative endpoints such
+// as healthchecks, debugging, and service information.
 package admin
 
 import (

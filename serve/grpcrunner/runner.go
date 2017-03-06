@@ -1,3 +1,4 @@
+// Package grpcrunner simplifies starting GRPC servers with ifrit.
 package grpcrunner
 
 import (

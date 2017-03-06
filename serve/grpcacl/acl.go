@@ -1,3 +1,5 @@
+// Package grpcacl provides a method of applying coarse service ACLs based on
+// the identity of the connecting service.
 package grpcacl
 
 import (

@@ -1,3 +1,6 @@
+// Package tlsconfig provides opintionated helpers for building tls.Configs.
+// It keeps up to date with internal Pivotal best practices and external
+// industry best practices.
 package tlsconfig
 
 import (

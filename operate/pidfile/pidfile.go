@@ -1,3 +1,5 @@
+// Package pidfile provides an ifrit.Runner which will manage your PID file
+// lifecycle.
 package pidfile
 
 import (
