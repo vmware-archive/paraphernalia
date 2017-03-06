@@ -43,6 +43,11 @@ var _ = Describe("generating TLS configurations", func() {
 				}))
 			})
 
+			It("includes the suite which is required by the HTTP/2 spec", func() {
+				// https://http2.github.io/http2-spec/#rfc.section.9.2.2
+				Expect(config.CipherSuites).To(ContainElement(tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256))
+			})
+
 			It("uses approved curves", func() {
 				Expect(config.CurvePreferences).To(ConsistOf(tls.CurveP384))
 			})
