@@ -5,4 +5,4 @@ go:
 
 script:
 - go install github.com/onsi/ginkgo/ginkgo
-- ginkgo -r --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --progress
+- ginkgo -r -p --failOnPending --progress
