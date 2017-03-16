@@ -4,7 +4,7 @@
 
 > *useful go things*
 
-[![Apache 2.0 License](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](/LICENSE) [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/pivotal-cf/paraphernalia)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pivotal-cf/paraphernalia?style=flat-square)](https://goreportcard.com/report/github.com/pivotal-cf/paraphernalia) [![Apache 2.0 License](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](/LICENSE) [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/pivotal-cf/paraphernalia)
 
 <br />
 
