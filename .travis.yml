@@ -1,0 +1,8 @@
+language: go
+
+go:
+- 1.x
+
+script:
+- go install github.com/onsi/ginkgo/ginkgo
+- ginkgo -r --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --progress
