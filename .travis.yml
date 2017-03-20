@@ -6,4 +6,4 @@ go:
 
 script:
 - go install github.com/onsi/ginkgo/ginkgo
-- ginkgo -r -p --failOnPending
+- ginkgo -r -p --failOnPending -skipPackage "grpcacl"
