@@ -15,12 +15,12 @@ import (
 )
 
 // OptionFunc is used to configure the runner.
-type OptionFunc func(*server) error
+type OptionFunc func(*server)
 
 // Runner builds and returns a runner that, when run, will start an HTTP server
 // listening on the specified port that provides the Go pprof endpoints from
 // the standard library along with the additional trace endpoints.
-func Runner(port string, options ...OptionFunc) (ifrit.Runner, error) {
+func Runner(port string, options ...OptionFunc) ifrit.Runner {
 	server := &server{
 		port:    port,
 		handler: defaultDebugEndpoints(),
@@ -30,7 +30,7 @@ func Runner(port string, options ...OptionFunc) (ifrit.Runner, error) {
 		option(server)
 	}
 
-	return server, nil
+	return server
 }
 
 type server struct {

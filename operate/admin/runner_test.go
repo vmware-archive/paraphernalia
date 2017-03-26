@@ -27,10 +27,7 @@ var _ = Describe("Runner", func() {
 	})
 
 	JustBeforeEach(func() {
-		var err error
-		runner, err = admin.Runner(port, optionFuncs...)
-		Expect(err).NotTo(HaveOccurred())
-
+		runner = admin.Runner(port, optionFuncs...)
 		process = ifrit.Invoke(runner)
 	})
 
