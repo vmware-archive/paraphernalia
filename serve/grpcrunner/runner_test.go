@@ -33,7 +33,7 @@ var _ = Describe("GRPC Server", func() {
 		dummyServer = &DummyServer{}
 
 		logger = lagertest.NewTestLogger("grpc-server")
-		runner = grpcrunner.NewGRPCServer(logger, listenAddr, func(server *grpc.Server) {
+		runner = grpcrunner.New(logger, listenAddr, func(server *grpc.Server) {
 			grpc_testing.RegisterTestServiceServer(server, dummyServer)
 		})
 		process = ginkgomon.Invoke(runner)

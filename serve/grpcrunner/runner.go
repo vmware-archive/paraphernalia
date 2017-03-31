@@ -10,20 +10,21 @@ import (
 	"google.golang.org/grpc"
 )
 
-type GRPCRegisterFunc func(server *grpc.Server)
-
 type grpcServer struct {
 	logger lager.Logger
 
 	listenAddr   string
-	registerFunc GRPCRegisterFunc
+	registerFunc func(*grpc.Server)
 	options      []grpc.ServerOption
 }
 
-func NewGRPCServer(
+// New creates a new runner for a GRPC server that can be started with ifrit.
+// The registerFunc can be used to register your GPRC services with the running
+// server. The options are passed through directly to the server.
+func New(
 	logger lager.Logger,
 	listenAddr string,
-	registerFunc GRPCRegisterFunc,
+	registerFunc func(*grpc.Server),
 	options ...grpc.ServerOption,
 ) ifrit.Runner {
 	return &grpcServer{
