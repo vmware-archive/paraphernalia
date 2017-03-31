@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/pivotal-cf/paraphernalia/operate/admin"
 	"github.com/tedsuo/ifrit"
@@ -70,6 +71,27 @@ var _ = Describe("Runner", func() {
 			Expect(body).To(ContainSubstring("service-name"))
 			Expect(body).To(ContainSubstring("it's a thing which does a thing"))
 			Expect(body).To(ContainSubstring("team name"))
+		})
+	})
+
+	Describe("enabling the uptime endpoint", func() {
+		BeforeEach(func() {
+			optionFuncs = []admin.OptionFunc{
+				admin.WithUptime(),
+			}
+		})
+
+		It("let's the operators of a service known how long it has been running", func() {
+			response, err := http.Get("http://localhost:" + port + "/uptime")
+			Expect(err).NotTo(HaveOccurred())
+
+			body, err := ioutil.ReadAll(response.Body)
+			Expect(err).NotTo(HaveOccurred())
+
+			parsed, err := time.ParseDuration(string(body))
+			Expect(err).NotTo(HaveOccurred())
+
+			Expect(parsed).To(BeNumerically("<", 1*time.Second))
 		})
 	})
 })
