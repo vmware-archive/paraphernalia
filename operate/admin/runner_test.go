@@ -46,8 +46,7 @@ var _ = Describe("Runner", func() {
 		body, err := ioutil.ReadAll(response.Body)
 		Expect(err).NotTo(HaveOccurred())
 
-		// This is the binary name for this packages test suite.
-		Expect(body).To(ContainSubstring("admin.test"))
+		Expect(body).To(ContainSubstring("admin"))
 	})
 
 	Describe("enabling the information endpoint", func() {
