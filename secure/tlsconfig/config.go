@@ -72,6 +72,10 @@ func (c Config) Client(opts ...ClientOption) *tls.Config {
 // to be suitable for communication to other external services as it contains a
 // strict definition of acceptable standards. The standards were taken from the
 // "Consolidated Remarks" internal document.
+//
+// Note: Due to the aggressive nature of the ciphersuites chosen here (they do
+// not support any ECC signing) it is not possible to use ECC keys with this
+// option.
 func WithPivotalDefaults() TLSOption {
 	return func(c *tls.Config) {
 		c.MinVersion = tls.VersionTLS12
