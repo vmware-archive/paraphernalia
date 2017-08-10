@@ -1,5 +1,8 @@
 // Package grpcacl provides a method of applying coarse service ACLs based on
 // the identity of the connecting service.
+//
+// The certificate format expected by this package *is not* stable. Please do
+// not use it in production.
 package grpcacl
 
 import (
