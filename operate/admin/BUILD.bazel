@@ -7,6 +7,7 @@ go_library(
         "runner.go",
         "uptime.go",
     ],
+    importpath = "github.com/pivotal-cf/paraphernalia/operate/admin",
     visibility = ["//visibility:public"],
     deps = [
         "@com_github_tedsuo_ifrit//:go_default_library",
@@ -17,15 +18,16 @@ go_library(
 
 go_test(
     name = "go_default_xtest",
+    size = "small",
     srcs = [
         "admin_suite_test.go",
         "runner_test.go",
     ],
+    importpath = "github.com/pivotal-cf/paraphernalia/operate/admin_test",
     deps = [
         ":go_default_library",
         "@com_github_onsi_ginkgo//:go_default_library",
         "@com_github_onsi_gomega//:go_default_library",
         "@com_github_tedsuo_ifrit//:go_default_library",
     ],
-    size = "small",
 )
