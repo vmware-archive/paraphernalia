@@ -97,7 +97,6 @@ var _ = Describe("GRPC Server", func() {
 			conn, err := grpc.Dial(
 				listenAddr,
 				grpc.WithTransportCredentials(creds),
-				grpc.WithBlock(),
 			)
 			Expect(err).NotTo(HaveOccurred())
 
