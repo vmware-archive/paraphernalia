@@ -16,9 +16,6 @@ go_test(
         "suite_test.go",
     ],
     importpath = "github.com/pivotal-cf/paraphernalia/serve/grpcacl_test",
-    tags = [
-        "noci",  # TODO(cb): work out why this test suite does not run in travis
-    ],
     deps = [
         ":go_default_library",
         "//serve/grpcrunner:go_default_library",
